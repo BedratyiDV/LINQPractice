@@ -7,6 +7,8 @@ namespace LINQPractice
     {
         static void Main(string[] args)
         {
+            //Filling in the list with random integer values
+
             List<int> list = new List<int>();
 
             Random random = new Random();
@@ -14,30 +16,36 @@ namespace LINQPractice
             for (int i = 0; i < 100; i++)
             {
                 list.Add(random.Next(1, 101));
-                //Filling in collection with random values
+                
             }
+            //Output to Console the initial collection
+
             Console.WriteLine("Generated random numbers:");
 
             foreach (int number in list)
             {
-                Console.Write(number + " ");   //Output to Console the initial collection
+                Console.Write(number + " ");   
             }
             Console.WriteLine();
             Console.WriteLine();
 
+            //Filtering out odd values and calculating squares of resulting values
 
             var result = list.Where(x => x % 2 != 0).Select(x => x * x).ToList();
 
             foreach (int number in result)
             {
-                Console.Write(number + " ");   //Output to Console the initial collection
+                Console.Write(number + " ");   
             }
             Console.WriteLine();
+
+            //Calculating Sum of squares
 
             var result1 = list.Where(x => x % 2 != 0).Select(x => x * x).Sum();
 
             Console.WriteLine($"Result = {result1}");
 
+            //Creating 20 new instances of Person object and adding them to person list
 
             List<Person> personList = new List<Person>();
 
@@ -82,21 +90,27 @@ namespace LINQPractice
             Person person20 = new Person("Martin", 20, 47);
             personList.Add(person20);
 
+            //Filtering out persons who older 20 years old
+
             var result2 = personList.Where(x => x.Age > 20);
 
             foreach (var person in result2)
             {
-                Console.WriteLine($"Name: {person.Name} Age: {person.Age} ");   //Output to Console the initial collection
+                Console.WriteLine($"Name: {person.Name} Age: {person.Age} ");   
             }
             Console.WriteLine();
+
+            //Saving the persons filtered on previous step into a collection of anonimous type objects and sorting Names by alphabet
 
             var result3 = personList.Where(x => x.Age > 20).Select(x => new { Id = x.Id, Name = x.Name }).OrderBy(x => x.Name);
 
             foreach (var person in result3)
             {
-                Console.WriteLine($"Id: {person.Id} Name: {person.Name} ");   //Output to Console the initial collection
+                Console.WriteLine($"Id: {person.Id} Name: {person.Name} ");   
             }
             Console.WriteLine();
+
+            //Call of extension method for finding penultimate element from the collection of anonimous type objects (from previous step)
 
             try
             {
@@ -106,7 +120,7 @@ namespace LINQPractice
             }
             catch
             {
-                throw new ArgumentNullException("The before last item is NULL ");
+                throw new ArgumentNullException("The penultimate item is NULL ");
             }
 
         }    
